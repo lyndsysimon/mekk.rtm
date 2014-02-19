@@ -403,6 +403,8 @@ class RtmClient(object):
             tasks = [ tasks ]
         for task_list in tasks:
             list_id = task_list['id']
+            if not task_list.get('taskseries'):
+                raise StopIteration()
             for taskseries in RtmClient._wrap_element_as_list_if_singular(task_list['taskseries']):
                 task_block = taskseries['task']
                 if type(task_block) is not list:
